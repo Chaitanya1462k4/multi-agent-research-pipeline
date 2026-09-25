@@ -1,6 +1,6 @@
 # ◆ CORTEX — Multi-Agent Research System
 
-> **Ask a question. Four agents chase the answer.**
+> **Ask a question. Four stages work together to find the answer.**
 
 🚀 **Live Demo:** [Try CORTEX](https://cortexmars.streamlit.app/)
 
@@ -82,13 +82,13 @@ pip install -r requirements.txt
 Create a `.env` file in the project root:
 
 ```env
-OPENROUTER_API_KEY=your_openrouter_api_key
+GROQ_API_KEY=your_groq_api_key
 TAVILY_API_KEY=your_tavily_api_key
 ```
 
 | Variable | Where to get it |
 |----------|----------------|
-| `OPENROUTER_API_KEY` | [openrouter.ai](https://openrouter.ai) |
+| `GROQ_API_KEY` | [console.groq.com](https://console.groq.com) |
 | `TAVILY_API_KEY` | [tavily.com](https://tavily.com) |
 
 ---
@@ -121,7 +121,7 @@ The pipeline prints live progress for each step and outputs the final report and
 ## 🔍 Agent Details
 
 ### Search Agent (`agents.py`)
-- Uses the `web_search` tool backed by **Tavily** to fetch the top 5 results for a topic.
+- Uses the `web_search` tool backed by **Tavily** to fetch the top 3 results for a topic.
 - Returns titles, URLs, and content snippets.
 
 ### Reader Agent (`agents.py`)
@@ -156,7 +156,7 @@ The pipeline prints live progress for each step and outputs the final report and
 
 | Layer | Technology |
 |-------|-----------|
-| LLM | `nvidia/nemotron-3-ultra-550b-a55b` via OpenRouter |
+| LLM | Groq — `qwen/qwen3.8-27b` and `openai/gpt-oss-120b`|
 | Agent Framework | LangChain (`langchain`, `langchain-core`) |
 | Web Search | Tavily (`tavily-python`) |
 | Web Scraping | `requests` + `BeautifulSoup4` |
