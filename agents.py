@@ -9,19 +9,36 @@ from langchain_openrouter import ChatOpenRouter
 load_dotenv()
 
 # llm=ChatGoogleGenerativeAI(model="gemini-2.5-flash")
-# llm=ChatGroq(model="meta-llama/llama-prompt-guard-2-86m",max_tokens=500)
-llm=ChatOpenRouter(model="nvidia/nemotron-3-ultra-550b-a55b:free")
+# llm=ChatGroq(model="openai/gpt-oss-120b",max_tokens=800)
+# llm=ChatOpenRouter(model="nvidia/nemotron-3-ultra-550b-a55b:free")
+# Search/Reader agents — mainly tool calling
+agent_llm = ChatGroq(
+    model="openai/gpt-oss-120b",
+    max_tokens=800       # ✅ fine
+)
+
+# Writer — needs room for a full structured report
+writer_llm = ChatGroq(
+    model="openai/gpt-oss-120b",
+    max_tokens=3000      # ⬆ bump from 1500
+)
+
+# Critic — compact format but needs space for bullet elaboration
+critic_llm = ChatGroq(
+    model="openai/gpt-oss-120b",
+    max_tokens=800       # ⬆ bump from 500
+)
 
 def build_search_agent():
     return create_agent(
-        model=llm,
+        model=agent_llm,
         tools=[web_search]
     )
 
 
 def build_reader_agent():
     return create_agent(
-        model=llm,
+        model=agent_llm,
         tools=[scrape_url]
     )
 
@@ -45,7 +62,7 @@ Structure the report as:
 Be detailed, factual and professional."""),
 ])
 
-writer_chain = writer_prompt | llm | StrOutputParser()
+writer_chain = writer_prompt | writer_llm | StrOutputParser()
 
 #critic_chain 
 
@@ -72,4 +89,4 @@ One line verdict:
 ..."""),
 ])
 
-critic_chain = critic_prompt | llm | StrOutputParser()
+critic_chain = critic_prompt | critic_llm | StrOutputParser()
