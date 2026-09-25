@@ -13,7 +13,7 @@ load_dotenv()
 # llm=ChatOpenRouter(model="nvidia/nemotron-3-ultra-550b-a55b:free")
 # Search/Reader agents — mainly tool calling
 agent_llm = ChatGroq(
-    model="openai/gpt-oss-120b",
+    model="qwen/qwen3.8-27b",
     max_tokens=800       # ✅ fine
 )
 
