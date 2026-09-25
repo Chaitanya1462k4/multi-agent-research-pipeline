@@ -2,6 +2,8 @@
 
 > **Ask a question. Four agents chase the answer.**
 
+🚀 **Live Demo:** [Try CORTEX](https://cortexmars.streamlit.app/)
+
 Cortex is an autonomous multi-agent research pipeline built with **LangChain** and powered by an **OpenRouter LLM**. Given any research topic, four specialized agents collaborate in sequence — searching the web, scraping deep content, writing a structured report, and critically reviewing it — before delivering a polished, downloadable result through a sleek **Streamlit** UI.
 
 ---
